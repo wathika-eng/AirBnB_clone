@@ -1,1 +1,1 @@
-https://s3.amazonaws.com/alx-intranet.hbtn.io/uploads/medias/2018/6/815046647d23428a14ca.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUSBVO6H7D%2F20240112%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240112T180533Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=fbd1113aedc79bf95b349c1753cf44fbf6a8444907656eb15ac7dab4755f8342
+![image](https://github.com/wathika-eng/AirBnB_clone/assets/71040609/4218289d-276f-48e8-a97c-e8e6a4974976)
