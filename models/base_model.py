@@ -3,8 +3,10 @@
 from datetime import datetime
 from uuid import uuid4
 
+
 class BaseModel:
     """BaseModel class"""
+
     def __init__(self, *args, **kwargs):
         """
         Constructor of BaseModel class
@@ -14,6 +16,7 @@ class BaseModel:
         Raises:
             TypeError: If kwargs are not given in correct format
         """
+
         if kwargs:
             for key, value in kwargs.items():
                 if key == "__class__":
@@ -28,4 +31,16 @@ class BaseModel:
 
     def save(self):
         """Updates updated_at with current time"""
-        
+        self.updated_at = datetime.now()
+
+    def __str__(self):
+        """The string representation of BaseModel"""
+        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
+
+    def to_dict(self):
+        """Returns a dictionary containing all keys/values of __dict__"""
+        new_dict = self.__dict__.copy()
+        new_dict["__class__"] = self.__class__.__name__
+        new_dict["created_at"] = self.created_at.isoformat()
+        new_dict["updated_at"] = self.updated_at.isoformat()
+        return new_dict

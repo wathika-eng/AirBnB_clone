@@ -6,11 +6,16 @@ import cmd
 
 class HBNBCommand(cmd.Cmd):
     """A shell made using python"""
+
     prompt = "(hbnb) "
 
     def do_quit(self, line):
         """Quit command to exit the program"""
         return True
+
+    def default(self, line):
+        """If unknown command is called"""
+        print("** class name missing **")
 
     def do_EOF(self, line):
         """EOF command to exit the program"""
@@ -25,5 +30,5 @@ class HBNBCommand(cmd.Cmd):
         pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     HBNBCommand().cmdloop()

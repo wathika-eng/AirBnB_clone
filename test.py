@@ -12,4 +12,4 @@ import json
 # print(till_day.days)
 
 t = datetime.datetime.today()
-x = json.t 
+x = json.t
