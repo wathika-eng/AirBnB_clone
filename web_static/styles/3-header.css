@@ -1,4 +1,4 @@
-.header{
+header{
     background-color: white;
     height: 60px;
     width: 100%;
@@ -9,5 +9,7 @@
 .logo{
     float: left;
     margin-left: 5%;
-    margin-top: 10px;
+    background: url("../images/logo.png");
+    background-repeat: no-repeat;
+    margin-top: -2px;
 }
