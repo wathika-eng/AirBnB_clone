@@ -7,7 +7,9 @@
     font-family: Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 }
-
+*{
+    box-sizing: border-box;
+}
 .container{
     max-width: 1000px;
     margin: 30px auto;

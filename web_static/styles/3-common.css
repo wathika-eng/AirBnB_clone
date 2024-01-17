@@ -6,3 +6,7 @@
     font-family: Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 }
+
+*{
+    box-sizing: border-box;
+}
