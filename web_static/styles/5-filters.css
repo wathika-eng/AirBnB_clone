@@ -1,0 +1,19 @@
+div.locations, div.amenities{
+    height: 100%;
+    width: 25%;
+    box-sizing: border-box;
+    padding: 0 20px;
+    border-right: 1px solid #DDDDDD;
+    
+
+}
+div.locations h4, div.amenities h4{
+    font-weight: 400;
+    font-size: 14px;
+
+}
+
+div.amenities h3, div.locations h3{
+    font-weight: 600;
+
+}
