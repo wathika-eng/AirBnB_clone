@@ -2,7 +2,7 @@
 """BaseModel class"""
 from datetime import datetime
 from uuid import uuid4
-import models
+from models import storage
 
 
 class BaseModel:
@@ -19,25 +19,25 @@ class BaseModel:
              are not given in correct format
         """
         format = "%Y-%m-%dT%H:%M:%S.%f"
-        self.id = str(uuid4())
-        self.created_at = datetime.today()
-        self.updated_at = datetime.today()
-        if kwargs:
+
+        if kwargs is not None and kwargs != {}:
             for key, value in kwargs.items():
                 if key == "__class__":
                     continue
                 if key == "created_at" or key == "updated_at":
                     self.__dict__[key] = datetime.strptime(value, format)
                 else:
-                    self.__dict__[key] = value
+                    self.__dict__[key] = kwargs[key]
         else:
-            models.storage.new(self)
+            self.id = str(uuid4())
+            self.created_at = datetime.today()
+            self.updated_at = datetime.today()
+            storage.new(self)
 
     def save(self):
         """Updates updated_at with current time"""
         self.updated_at = datetime.today()
-        models.storage.save()
-
+        storage.save()
 
     def to_dict(self):
         """Returns a dictionary containing all keys/values of __dict__"""
@@ -49,6 +49,4 @@ class BaseModel:
 
     def __str__(self):
         """The string representation of BaseModel"""
-        classname = self.__class__.__name__
-        return "[{}] ({}) {}".format(classname, self.id, self.__dict__)
-
+        return "[{}] ({}) {}".format(type(self).__name__, self.id, self.__dict__)
