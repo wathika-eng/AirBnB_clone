@@ -94,3 +94,7 @@ class FileStorage:
             # "Review": {"place_id": str, "user_id": str, "text": str},
         }
         return attributes
+
+
+if "__main__" == __name__:
+    FileStorage()

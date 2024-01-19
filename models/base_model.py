@@ -2,7 +2,8 @@
 """BaseModel class"""
 from datetime import datetime
 from uuid import uuid4
-from models import storage
+
+import models
 
 
 class BaseModel:
@@ -32,12 +33,12 @@ class BaseModel:
             self.id = str(uuid4())
             self.created_at = datetime.today()
             self.updated_at = datetime.today()
-            storage.new(self)
+            models.storage.new(self)
 
     def save(self):
         """Updates updated_at with current time"""
         self.updated_at = datetime.today()
-        storage.save()
+        models.storage.save()
 
     def to_dict(self):
         """Returns a dictionary containing all keys/values of __dict__"""
@@ -50,3 +51,7 @@ class BaseModel:
     def __str__(self):
         """The string representation of BaseModel"""
         return "[{}] ({}) {}".format(type(self).__name__, self.id, self.__dict__)
+
+
+if __name__ == "__main__":
+    BaseModel()

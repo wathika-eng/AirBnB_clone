@@ -1,7 +1,11 @@
 #!/usr/bin/python3
 """A shell made using python"""
+
+import sys
+import os
+
 from models.base_model import BaseModel
-from models import storage
+import models
 import cmd
 
 
@@ -20,10 +24,10 @@ class HBNBCommand(cmd.Cmd):
         """Create a new instance of BaseModel"""
         if line == "" or line is None:
             print("** class name missing **")
-        elif line not in storage.classes:
+        elif line not in models.storage.classes:
             print("** class doesn't exist **")
         else:
-            new = storage.classes()[line]()
+            new = models.storage.classes()[line]()
             new.save()
             print(new.id)
 
@@ -31,14 +35,14 @@ class HBNBCommand(cmd.Cmd):
         """Reads the string representation of an instance"""
         if line == "" or line is None:
             print("** class name missing **")
-        elif line not in storage.classes:
+        elif line not in models.storage.classes:
             print("** class doesn't exist **")
         elif line.split()[0] == "":
             print("** instance id missing **")
-        elif line.split()[0] not in storage.all():
+        elif line.split()[0] not in models.storage.all():
             print("** no instance found **")
         else:
-            print(storage.all()[line.split()[0]])
+            print(models.storage.all()[line.split()[0]])
 
     def do_update(self, line):
         """Update Users"""
