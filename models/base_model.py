@@ -21,11 +21,11 @@ class BaseModel:
         format = "%Y-%m-%dT%H:%M:%S.%f"
 
         if kwargs is not None and kwargs != {}:
-            for key, value in kwargs.items():
+            for key in kwargs:
                 if key == "__class__":
                     continue
                 if key == "created_at" or key == "updated_at":
-                    self.__dict__[key] = datetime.strptime(value, format)
+                    self.__dict__[key] = datetime.strptime(kwargs[key], format)
                 else:
                     self.__dict__[key] = kwargs[key]
         else:
@@ -44,7 +44,7 @@ class BaseModel:
         new_dict = self.__dict__.copy()
         new_dict["created_at"] = self.created_at.isoformat()
         new_dict["updated_at"] = self.updated_at.isoformat()
-        new_dict["__class__"] = self.__class__.__name__
+        new_dict["__class__"] = type(self).__name__
         return new_dict
 
     def __str__(self):
