@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """A shell made using python"""
-
+from models.base_model import BaseModel
+from models import storage
 import cmd
 
 
@@ -14,33 +15,30 @@ class HBNBCommand(cmd.Cmd):
         super().__init__()
         self.users = {}
 
+    # creating a new user
     def do_create(self, line):
         """Create a new instance of BaseModel"""
-        args = line.split()
-        if len(args) == 2:
-            digit, name = args
-            if digit.isdigit():
-                self.users[digit] = name
-                print(f"{name} created as user {digit}")
-            else:
-                print("Only integers allowed\n Create <int> <str>")
-        elif len(args) > 2:
-            print("** too many arguments **")
-        # else:
-        #     print("** class name missing **")
-        # if line:
-        #     if line in self.users:
-        #         print("** class already exists **")
-        #     else:
-        #         self.users[line] = []
-        else:
+        if line == "" or line is None:
             print("** class name missing **")
+        elif line not in storage.classes:
+            print("** class doesn't exist **")
+        else:
+            new = storage.classes()[line]()
+            new.save()
+            print(new.id)
 
-    def do_read(self, line):
+    def do_show(self, line):
         """Reads the string representation of an instance"""
-        print("\t\tUsers available are: ")
-        for digit, name in self.users.items():
-            print(f"User ID: {digit}   \t username: {name}")
+        if line == "" or line is None:
+            print("** class name missing **")
+        elif line not in storage.classes:
+            print("** class doesn't exist **")
+        elif line.split()[0] == "":
+            print("** instance id missing **")
+        elif line.split()[0] not in storage.all():
+            print("** no instance found **")
+        else:
+            print(storage.all()[line.split()[0]])
 
     def do_update(self, line):
         """Update Users"""
@@ -55,7 +53,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             print(f"Invalid, use the create command")
 
-    def do_delete(self, line):
+    def do_destroy(self, line):
         """Delete a User"""
         if line in self.users:
             del self.users[line]
