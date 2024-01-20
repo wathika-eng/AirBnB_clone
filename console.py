@@ -1,14 +1,15 @@
 #!/usr/bin/python3
 """Defines the HBnB console."""
+import sys
 import cmd
 import re
-from shlex import split
-from models import storage
+from shlex import split 
 from models.base_model import BaseModel
+from models.__init__ import storage
 from models.user import User
+from models.place import Place
 from models.state import State
 from models.city import City
-from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
 
@@ -38,8 +39,11 @@ class HBNBCommand(cmd.Cmd):
         prompt (str): The command prompt.
     """
 
-    prompt = "(hbnb) "
+    prompt = "(hbnb) " if sys.__stdin__.isatty() else ""
+
     __classes = {"BaseModel", "User", "State", "City", "Place", "Amenity", "Review"}
+
+    dot_cmds = ["all", "count", "show", "destroy", "update"]
 
     def emptyline(self):
         """Do nothing upon receiving an empty line."""
@@ -65,6 +69,54 @@ class HBNBCommand(cmd.Cmd):
                     return argdict[command[0]](call)
         print("*** Unknown syntax: {}".format(arg))
         return False
+
+    def help_show(self):
+        """Help information for the show command"""
+        print("Shows an individual instance of a class")
+        print("[Usage]: show <className> <objectId>\n")
+
+    def help_count(self):
+        """ """
+        print("Usage: count <class_name>")
+
+    def help_update(self):
+        """Help information for the update class"""
+        print("Updates an object with new information")
+        print("Usage: update <className> <id> <attName> <attVal>\n")
+
+    def preloop(self):
+        """Prints if isatty is false"""
+        if not sys.__stdin__.isatty():
+            print("(hbnb)")
+
+    def help_destroy(self):
+        """Help information for the destroy command"""
+        print("Destroys an individual instance of a class")
+        print("[Usage]: destroy <className> <objectId>\n")
+
+    def help_all(self):
+        """Help information for the all command"""
+        print("Shows all objects, or all of a class")
+        print("[Usage]: all <className>\n")
+
+    def help_create(self):
+        """Help information for the create method"""
+        print("Creates a class of any type")
+        print("[Usage]: create <className>\n")
+
+    def postcmd(self, stop, line):
+        """Prints if isatty is false"""
+        if not sys.__stdin__.isatty():
+            print("(hbnb) ", end="")
+        return stop
+
+    def help_quit(self):
+        """Prints the help documentation for quit"""
+        print("Exits the program with formatting\n")
+
+    def help_EOF(self):
+        """Prints the help documentation for EOF"""
+        print("Exits the program without formatting\n")
 
     def do_quit(self, arg):
         """Quit command to exit the program."""
