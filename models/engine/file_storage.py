@@ -96,3 +96,4 @@ class FileStorage:
                 "last_name": str,
             },
         }
+        return attributes
