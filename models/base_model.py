@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """BaseModel class for AirBnB clone"""
+
 from datetime import datetime
-from uuid import uuid4
-import json
+import uuid
 from models import storage
 
 
@@ -12,9 +12,9 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         """Initialization of BaseModel class
         Args:
-            args: arguments
-            kwargs: arguments
-            self: self
+            - *args: arguments
+            - **kwargs: arguments
+            - self: self
         Return:
             A new ID for each new instance
         """
@@ -32,7 +32,7 @@ class BaseModel:
                 else:
                     self.__dict__[key] = kwargs[key]
         else:
-            self.id = str(uuid4())
+            self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
             storage.new(self)
@@ -48,8 +48,8 @@ class BaseModel:
 
     def to_dict(self):
         """Returns a dictionary containing all keys/values of __dict__ of the instance"""
-        new_dict = self.__dict__.copy()
-        new_dict["__class__"] = type(self).__name__
-        new_dict["created_at"] = self.created_at.isoformat()
-        new_dict["updated_at"] = self.updated_at.isoformat()
-        return new_dict
+        my_dict = self.__dict__.copy()
+        my_dict["__class__"] = type(self).__name__
+        my_dict["created_at"] = self.created_at.isoformat()
+        my_dict["updated_at"] = self.updated_at.isoformat()
+        return my_dict
