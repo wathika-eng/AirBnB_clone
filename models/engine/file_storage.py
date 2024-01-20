@@ -3,7 +3,6 @@
 """File storage class for AirBnB clone"""
 import datetime
 import json
-import models
 import os
 
 
