@@ -1,53 +1,69 @@
-##   
-Python `uuid` Module Overview
+Interactive Mode:
+Run the Shell Script:
 
-The `uuid` module in Python facilitates the generation and manipulation of Universally Unique Identifiers (UUIDs). UUIDs are 128-bit unique identifiers commonly used in distributed computing.
+Execute the shell script ./console.py to start the interactive mode.
+Shell Prompt (hbnb):
 
-### Generating UUIDs
+The presence of (hbnb) indicates that the shell is ready to receive commands.
+Help Command:
 
-1.  **uuid1()**: Generates a UUID based on the current timestamp and hardware address.enter code here
-    
-    pythonCopy code
-    
-    `import uuid
-    uuid1 = uuid.uuid1()` 
-    
-2.  **uuid4()**: Generates a random UUID.
-    
-    pythonCopy code
-    
-    `import uuid
-    uuid4 = uuid.uuid4()` 
-    
+Typing help within the shell prompts the display of documented commands.
+User Interaction:
 
-### UUID Properties and Methods
+The user can then enter various commands and interact with the shell.
+Quit Command:
 
--   `hex`: Returns a hexadecimal string representation of the UUID.
--   `int`: Returns the UUID as a 128-bit integer.
--   `urn`: Returns the UUID as a URN (Uniform Resource Name).
--   `bytes`: Returns the UUID as a 16-byte string.
-    
-    pythonCopy code
-    
-    `import uuid
-    uuid_obj = uuid.uuid4()
-    print(uuid_obj.hex)
-    print(uuid_obj.int)
-    print(uuid_obj.urn)
-    print(uuid_obj.bytes)` 
-    
+Typing quit exits the shell, returning to the terminal.
+Example:
 
-### Parsing UUIDs
+$ ./console.py
+(hbnb) help
 
-Parse a UUID from a string using the `uuid.UUID` constructor.
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
 
-pythonCopy code
+(hbnb) 
+(hbnb) 
+(hbnb) quit
+$
+Non-Interactive Mode:
+Command Input via Echo:
 
-`import uuid
-uuid_str = "550e8400-e29b-41d4-a716-446655440000"
-parsed_uuid = uuid.UUID(uuid_str)` 
+Instead of manually entering commands, input commands via a pipeline using echo.
+Example Commands:
 
-These examples demonstrate the basic usage of the `uuid` module for UUID generation, properties access, and parsing in Python. Depending on your specific use case, choose the appropriate function or method.
+Examples include piping the command help into the shell script.
+Example:
 
+$ echo "help" | ./console.py
+(hbnb)
 
-![image](https://github.com/wathika-eng/AirBnB_clone/assets/71040609/4218289d-276f-48e8-a97c-e8e6a4974976)
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+(hbnb) 
+$
+Non-Interactive Mode with File Input:
+Create a File with Commands:
+
+Create a file (e.g., test_help) containing commands (e.g., help).
+Display File Contents with Cat:
+
+Use cat to display the contents of the file.
+Pipe File Contents into Shell Script:
+
+Pipe the file contents into the shell script to simulate non-interactive mode with file input.
+Example:
+
+$ cat test_help
+help
+$
+$ cat test_help | ./console.py
+(hbnb)
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+(hbnb) 
+$
